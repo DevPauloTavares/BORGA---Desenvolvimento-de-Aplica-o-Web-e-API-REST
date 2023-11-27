@@ -1,0 +1,16 @@
+
+	<div id = "confTable">
+		<div class="listajogos">
+			<h2>Lista com nomes de 10 jogos mais populares</h2>
+		</div>
+		<div>
+			<table class="table table-striped table-dark">
+				<th>Nomes</th>
+			  {{#each games}}
+                <tr>
+                    <td><a href="Detail%20game/{{name}}">{{name}}</a></td>
+                </tr>
+            {{/each}}
+			</table>
+		</div>
+	</div>

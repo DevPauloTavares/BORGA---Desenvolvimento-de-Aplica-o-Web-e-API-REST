@@ -1,0 +1,51 @@
+
+<body>
+    <div id = "divPrin">
+        <div class="divTes1">
+              <div>
+                    <span class = "textColor"> 
+                      Nome do grupo: <br> </span>
+                     <span class = "textColor2">  {{nameGroup}} <br> </span>
+                     <span class = "textColor"> Discrição do grupo: <br> </span>
+                     <span class = "textColor2"> {{discription}} </span>
+                   <br>
+                   <a href="/Update%20group">Atualizar dados grupo</a>
+              </div>
+              <div>
+              <form method="POST" action="/addGameGroup"  align="center" >
+                    <br>
+                        <h3>Adicionar jogo ao grupo</h3>
+                        <input type="text" name="nome" placeholder="Digite o nome do jogo"> 
+                        
+                        <input type="submit" name="Criar" value="Adicionar">    
+                    </form>
+              </div>
+        </div>
+
+        <div class="divTes2">
+          <table class="table table-striped table-dark">
+             <tr>    
+                <th>Jogos</th>
+                <th>Eliminar jogo</th>
+            </tr>
+              {{#each group}}
+                          <tr   id="gamerow_{{id}}_{{userId}}">   
+                            <td>
+                                  {{name}} 
+                                  <br>
+                                  <img src={{image_url}} class="max-width" align="center" height ="500" width="500">
+                                <br>
+                                  {{description}}
+                                  <br> <br> <br>
+                            </td>
+                          <td><button id="btn_{{id}}_{{userId}}"> Eliminar </button></td>
+                          </tr>
+              {{/each}}
+          </table>
+        </div>
+    </div>
+</body>
+
+ 
+            
+          

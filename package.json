@@ -1,0 +1,26 @@
+{
+  "name": "TesteTando",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "elasticsearch": "^16.7.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "hbs": "^4.2.0",
+    "node-fetch": "^2.6.2",
+    "passport": "^0.5.2"
+  },
+  "devDependencies": {
+    "jest": "^27.4.3",
+    "supertest": "^6.1.6"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node borga-server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

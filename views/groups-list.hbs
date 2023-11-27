@@ -1,0 +1,34 @@
+
+<div id = "area-principal">
+		<div class="confTableG">
+			<div class="listargrupos">
+				<h2>Grupos do Usuario</h2>
+			</div>
+			<div>
+				<table class="table table-striped table-dark">
+					<th>Nome do grupo</th>
+					<th>Descrição</th>
+					<th></th>	
+                        {{#each groups}}
+                            <tr id="taskrow_{{id}}">
+                                <td><a href="/groupCreate/{{id}}/{{name}}/{{description}}">{{name}}</a></td>
+                                <td>{{description}}</td>
+                                <td><button id="btn_{{id}}"> Delete </button></td>
+                            </tr>
+                        {{/each}}
+				</table>
+			</div>
+		</div>
+		<div class="AddGroup">
+			<h3>Criar um novo grupo</h3>
+			<form method="post" action ="/createGroups">
+				<span class="ND">Nome : </span> <br>
+				<input type="text" name="nome"> <br> <br>
+				<span class="ND">Descrição :</span> <br> 
+				<input type="text" name="description"> <br> <br>
+				<input type="submit" name="Criar" value="Criar">
+			</form>
+			teste
+		</div>
+		
+	</div>

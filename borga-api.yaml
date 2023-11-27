@@ -1,0 +1,395 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Tasks API
+  description: This is a simple Tasks API
+  # put the contact info for your development or API team
+  contact:
+    email: you@your-company.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    
+tags :
+  - name: users
+  - name: game
+  - name: group
+  
+
+paths:
+  /api/games:
+    get:
+      summary: lists all games
+      operationId: getAllGames
+      description: lists all games
+      tags:
+      - game
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        201:
+          description: games listed
+          schema:
+            items:
+              $ref: '#/definitions/games'
+        400:
+          description: Invalid input
+
+  /api/games/{gameId}:
+    get:
+      summary: lists the game with the corresponding ID
+      operationId: getGameById
+      description: lists the game with the corresponding ID
+      tags:
+      - game
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: gameId
+        description: id of the game you want to list
+        required: true
+        type: string
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/games'
+        400:
+          description: bad input parameter
+          
+  /api/gamesN/{gameName}:
+    get:
+      summary: lists the game with the corresponding name
+      operationId: getGameByName
+      description: lists the game with the corresponding name
+      tags:
+      - game
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: gameName
+        description: name of the game you want to list
+        required: true
+        type: string
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/games'
+        400:
+          description: bad input parameter
+          
+  /api/users:
+    post:
+      summary: creates a new user
+      operationId: createNewUser
+      description: creates a new user
+      tags:
+      - users
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: name
+        description: username to be used
+        required: true
+        type: string
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/NewUser'
+        400:
+          description: bad input parameter
+          
+  /api/groups:
+    post:
+      summary: creates a new group
+      operationId: createNewGroup
+      description: Create group providing its name and description
+      tags:
+      - group
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: token
+        required: true
+        type : string
+        format : uuid
+      - in: query
+        name: description
+        description: description of group
+        required: true
+        type: string
+      - in: query
+        name: name
+        description: name of group
+        required: true
+        type: string
+      responses:
+        201:
+          description: group created
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+        400:
+          description: Invalid input, object invalid
+          
+    get:
+      summary: lists all groups
+      operationId: getGroup
+      description: lists all groups
+      tags:
+      - group
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: token
+        required: true
+        type : string
+        format : uuid
+      responses:
+        201:
+          description: task created
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+        404:
+          description: Task not found
+   
+      
+  /api/groups/{idGroup}:
+    put:
+      summary: updates group information
+      description: updates group information
+      operationId: UpdateGroup
+      tags:
+      - group
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: token
+        required: true
+        type : string
+        format : uuid
+      - in: query
+        name: name
+        description: name you want to change to
+        required: true
+        type: integer
+      - in: query
+        name: description
+        description: description you want to change
+        required: true
+        type: string
+      - in: path
+        name: idGroup
+        description: group id of the group you want to update
+        required: true
+        type: string
+      responses:
+        200:
+          description: group updated
+        404:
+          description: Game not found
+          
+    delete:
+      summary: Deletes a specified group
+      description: Deletes a group
+      operationId: deleteGroup
+      tags:
+      - group
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: token
+        required: true
+        type : string
+        format : uuid
+      - in: path
+        name: idGroup
+        description: group id of the group you want to delete
+        required: true
+        type: string
+      responses:
+        400:
+          description: Invalid ID supplied
+        404:
+          description: group not found
+  
+    get:
+      summary: lists a group information
+      description: lists a group information
+      operationId: GroupDetails
+      tags:
+      - group
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: token
+        required: true
+        type : string
+        format : uuid
+      - in: path
+        name: idGroup
+        description: group id of the group you want to see the details
+        required: true
+        type: string
+      responses:
+        200:
+          description: group details listed
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+        404:
+          description: ID not found
+  
+  /api/groups/{idGroup}/{gameId}:
+    post:
+      summary: adds a game to a group
+      description: adds a game to a group
+      operationId: addGameToGroup
+      tags:
+      - group
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: token
+        required: true
+        type : string
+        format : uuid
+      - in: path
+        name: idGroup
+        description: group id of the group you want to add the game
+        required: true
+        type: string
+      - in: path
+        name: gameId
+        description: game id of the game you want to add
+        required: true
+        type: string  
+      responses:
+        200:
+          description: game added
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+        404:
+          description: ID not found
+ 
+    delete:
+      summary: removes a game from a group
+      description: removes a game from a group
+      operationId: DeleteGameToGroup
+      tags:
+      - group
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: token
+        required: true
+        type : string
+        format : uuid
+      - in: path
+        name: idGroup
+        description: group id of the group you want to remove the game
+        required: true
+        type: string
+      - in: path
+        name: gameId
+        description: game id of the game you want to remove
+        required: true
+        type: string  
+      responses:
+        200:
+          description: game removed
+        404:
+          description: ID not found
+  
+definitions:
+  
+  Group:
+    type: object
+    required:
+    - id
+    - name
+    - description
+    - games
+    - userId
+    properties:
+      id:
+        type: string
+        example: 1
+      name:
+        type: string
+        example: Mogas' games
+      description:
+        type: string
+        example: jogos do Mogas
+      games:
+        type: array
+        items:
+          $ref: '#/definitions/games'
+      userId:
+        type: string
+        example: 1
+        
+  games:
+    type: object
+    required:
+    - id
+    - name
+    - url
+    properties:
+      id:
+        type: string
+        example: TAAifFP590
+      name:
+        type: string
+        example: Root
+      url:
+        type: string
+        example: https://www.boardgameatlas.com/game/TAAifFP590/root
+  
+  NewUser:
+    type: object
+    required:
+    - name
+    - id
+    - token
+    properties:
+      name:
+        type: string
+        example: CLOPZ 
+      id:
+        type: string
+        example: 1
+      token:
+        type: string
+        format: uuid

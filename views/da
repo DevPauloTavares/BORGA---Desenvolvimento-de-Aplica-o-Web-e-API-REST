@@ -1,0 +1,46 @@
+
+
+             <style>
+                main {
+                background-color: rgb(26, 25, 24);
+                width: 800px;
+                height: fit-content;
+                margin: 50px auto auto;
+                padding: 40px;
+                border-radius: 10px;
+                }
+                .painel-superior {
+              margin: 15px 0;
+            }
+            
+            .painel-inferior {
+              margin: 15px 0;
+            }
+            </style>
+                          
+                        <main>
+                       <section>
+                      {{#each group}}
+                      
+                        <div class="painel-superior" align="center">
+                                 {{name}} 
+                         </div>
+                         <div class="painel-superior">
+                                <img src={{image_url}} class="max-width" align="center" height ="500" width="500">
+                        </div>
+                        <div class="painel-superior">
+                                {{description}}
+                        </div>
+                     {{/each}}
+                       </section>
+                         </main>
+            
+                  
+                            <form method="POST" action="/addGameGroup">
+                            <br>
+                                <h1>Adicionar jogo ao grupo</h1>
+                                <input type="text" name="nome" placeholder="Digite o nome do jogo"> 
+                                <input type="submit" name="Criar" value="Adicionar">    
+                            </form>
+                
+            
